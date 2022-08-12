@@ -1,19 +1,28 @@
 package ru.inobitec.status.service.Impl;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Component;
-import ru.inobitec.status.model.Statuses;
-import ru.inobitec.status.mappers.StatusMapper;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import ru.inobitec.status.model.StatusEntity;
+import ru.inobitec.status.repository.StatusRepository;
 import ru.inobitec.status.service.StatusService;
 
-@Component
+@Service
 @RequiredArgsConstructor
 public class StatusServiceImpl implements StatusService {
 
-    StatusMapper statusMapper;
+    @Autowired
+    private StatusRepository statusRepository;
 
     @Override
-    public void changeStatus() {
-        statusMapper.changeStatus(Statuses.IN_WORK);
+    public void changeStatus(String message) {
+        String[] msg = message.split(" ");
+        StatusEntity status = new StatusEntity();
+        status.setId(Long.parseLong(msg[0]));
+        switch (msg[1]) {
+            case "created" -> status.setStatusName("created");
+            case "updated" -> status.setStatusName("updated");
+        }
+        statusRepository.changeStatus(status);
     }
 }

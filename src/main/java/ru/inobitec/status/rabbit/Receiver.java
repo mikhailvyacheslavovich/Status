@@ -12,11 +12,7 @@ public class Receiver {
     private StatusService statusService;
 
     @RabbitListener(queues = "MessageQueue")
-    public void getMsg(final String message) {
-        System.out.println(message);
-
-        if (message.equals("Change status")) {
-            statusService.changeStatus();
-        }
+    public void getMsg(String message) {
+        statusService.changeStatus(message);
     }
 }

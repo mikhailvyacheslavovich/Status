@@ -1,9 +1,9 @@
 package ru.inobitec.status.mappers;
 
 import org.apache.ibatis.annotations.Mapper;
-import ru.inobitec.status.model.Statuses;
+import ru.inobitec.status.model.StatusEntity;
 
 @Mapper
 public interface StatusMapper {
-    void changeStatus(Statuses status);
+    void changeStatus(StatusEntity status);
 }
