@@ -1,15 +1,15 @@
 package ru.inobitec.status.rabbit;
 
+import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import ru.inobitec.status.service.StatusService;
 
 @Component
+@RequiredArgsConstructor
 public class Receiver {
 
-    @Autowired
-    private StatusService statusService;
+    private final StatusService statusService;
 
     @RabbitListener(queues = "MessageQueue")
     public void getMsg(String message) {

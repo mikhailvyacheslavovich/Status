@@ -11,8 +11,7 @@ import ru.inobitec.status.service.StatusService;
 @RequiredArgsConstructor
 public class StatusServiceImpl implements StatusService {
 
-    @Autowired
-    private StatusRepository statusRepository;
+    private final StatusRepository statusRepository;
 
     @Override
     public void changeStatus(String message) {
