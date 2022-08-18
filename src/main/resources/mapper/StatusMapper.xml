@@ -11,8 +11,7 @@
 
     <update id="changeStatus" parameterType="ru.inobitec.status.model.StatusEntity">
         UPDATE status
-        SET id          = #{id},
-            status_name = #{statusName}
+        SET status_name = #{statusName}
         WHERE id = #{id};
     </update>
 </mapper>
