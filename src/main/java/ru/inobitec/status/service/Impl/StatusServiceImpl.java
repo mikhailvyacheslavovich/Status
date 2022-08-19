@@ -18,14 +18,18 @@ public class StatusServiceImpl implements StatusService {
 
     @Override
     public void changeStatus(String message) {
-        String[] msg = message.split(" ");
-        StatusEntity status = new StatusEntity();
-        status.setId(Long.parseLong(msg[0]));
-        switch (msg[1]) {
-            case STATUS_CREATED -> status.setStatusName(STATUS_CREATED);
-            case STATUS_UPDATED -> status.setStatusName(STATUS_UPDATED);
-            default -> log.info(BAD_STATUS);
+        try {
+            String[] msg = message.split(" ");
+            StatusEntity status = new StatusEntity();
+            status.setId(Long.parseLong(msg[0]));
+            switch (msg[1]) {
+                case STATUS_CREATED -> status.setStatusName(STATUS_CREATED);
+                case STATUS_UPDATED -> status.setStatusName(STATUS_UPDATED);
+                default -> log.info(BAD_STATUS);
+            }
+            statusRepository.changeStatus(status);
+        } catch (RuntimeException ex) {
+            log.error(ex.getCause());
         }
-        statusRepository.changeStatus(status);
     }
 }
