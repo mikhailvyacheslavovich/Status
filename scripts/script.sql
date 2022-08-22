@@ -10,11 +10,11 @@ ALTER TABLE status
 
 CREATE INDEX STATUS_PK_IDX ON status (ID);
 
-DO$$
+DO $$
     DECLARE
         v_status_id      integer;
     BEGIN
         SELECT NEXTVAL('status_seq') INTO v_status_id;
-    INSERT INTO status(ID, STATUS_NAME) VALUES (v_status_id, 'open');
+    INSERT INTO status(ID, STATUS_NAME) VALUES (v_status_id + 1, 'open');
 END $$;
 
